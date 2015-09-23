@@ -9,7 +9,7 @@ package ift605tp2.client;
  *
  * @author Michaël
  */
-public class IFT605TP2Client {
+public class Client {
 
     /**
      * @param args the command line arguments
