@@ -6,17 +6,20 @@
 package ift605tp2.client.parsers;
 
 import udes.ds.agent.AbstractEquation;
-import udes.ds.agent.Equation;
+import udes.ds.agent.BasicEquation;
 
 /**
  *
  * @author Michaël
  */
-public class BasicParser extends SingleTermParser {
+public class BasicParser implements IEquationParser {
 
     @Override
     public AbstractEquation ParseEquation(String entry) {
-        return ExtractTerm(entry);
+        double coefficient = Double.parseDouble(entry.substring(0, entry.indexOf("x^")).trim());
+        int exponent = Integer.parseInt(entry.substring(entry.indexOf("x^") + 2).trim());
+        
+        return new BasicEquation(coefficient, exponent);
     }
 
 }

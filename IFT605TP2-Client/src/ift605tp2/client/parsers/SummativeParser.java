@@ -6,25 +6,22 @@
 package ift605tp2.client.parsers;
 
 import udes.ds.agent.AbstractEquation;
-import udes.ds.agent.BasicEquation;
 import udes.ds.agent.SummativeEquation;
 
 /**
  *
  * @author Michaël
  */
-public class SummativeParser extends MultiTermParser {
+public class SummativeParser implements IEquationParser {
 
+    private static final EquationParser parser = new EquationParser();
+    
     @Override
     public AbstractEquation ParseEquation(String entry) {
-        BasicEquation[] terms = SplitTerms(entry);
-        SummativeEquation result = new SummativeEquation(terms[0], terms[1]);
+        AbstractEquation first = parser.ParseEquation(entry.substring(0, entry.indexOf("+")).trim());
+        AbstractEquation second = parser.ParseEquation(entry.substring(entry.indexOf("+") + 1).trim());
 
-        for (int i = 2; i < terms.length; ++i) {
-            result = new SummativeEquation(result, terms[i]);
-        }
-
-        return result;
+        return new SummativeEquation(first, second);
     }
 
 }

@@ -185,7 +185,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel3" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="114" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnDerivate" min="-2" max="-2" attributes="0"/>
@@ -240,10 +240,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="optConstant" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="optBasic" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="optMult" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="optSum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -253,81 +253,62 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="optConstant" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="optBasic" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="optMult" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="optSum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="optConstant">
+            <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="equationTypeGroup"/>
-                </Property>
-                <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Constant"/>
-                <Property name="toolTipText" type="java.lang.String" value="Only write the constant value (Ex: 2)"/>
-                <Property name="name" type="java.lang.String" value="optConstant" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="70"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="equationTypeSelected"/>
-              </Events>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Constant"/>
+              </AccessibilityProperties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="optBasic">
+            <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="equationTypeGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Basic Equation"/>
-                <Property name="toolTipText" type="java.lang.String" value="Write both coefficient &amp; exponent separated by spaces (Ex. 2 3 =&gt; 2x^3)"/>
-                <Property name="actionCommand" type="java.lang.String" value="Basic"/>
-                <Property name="name" type="java.lang.String" value="optBasic" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="7x^2"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="equationTypeSelected"/>
-              </Events>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="BasicEquation"/>
+              </AccessibilityProperties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="optMult">
+            <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="equationTypeGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Multiplicative Equation"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Write each basic terms on different lines&lt;br/&gt; (Ex:&lt;br/&gt; 2 3 &lt;br/&gt; 4 5&lt;br/&gt;=&gt; 2x^3 * 4x^5)&lt;/html&gt;"/>
-                <Property name="actionCommand" type="java.lang.String" value="Multiplicative"/>
-                <Property name="name" type="java.lang.String" value="optMult" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="7x^3+5x^1"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="equationTypeSelected"/>
-              </Events>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="SummativeEquation"/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="optSum">
+            <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="equationTypeGroup"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Summative Equation"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Write each basic terms on different lines&lt;br/&gt; (Ex:&lt;br/&gt; 2 3 &lt;br/&gt; 4 5&lt;br/&gt;=&gt; 2x^3 + 4x^5)&lt;/html&gt;"/>
-                <Property name="actionCommand" type="java.lang.String" value="Summative"/>
-                <Property name="name" type="java.lang.String" value="optSum" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="(7x^1)(1x^3+3x^4)"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="equationTypeSelected"/>
-              </Events>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="MultiplicativeEquation"/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Equation type:"/>
+            <Property name="text" type="java.lang.String" value="Examples:"/>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Examples:"/>
+          </AccessibilityProperties>
         </Component>
       </SubComponents>
     </Container>
