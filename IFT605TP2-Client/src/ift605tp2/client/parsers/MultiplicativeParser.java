@@ -6,25 +6,48 @@
 package ift605tp2.client.parsers;
 
 import udes.ds.agent.AbstractEquation;
-import udes.ds.agent.BasicEquation;
 import udes.ds.agent.MultiplicativeEquation;
 
 /**
  *
  * @author Michaël
  */
-public class MultiplicativeParser extends MultiTermParser{
+public class MultiplicativeParser implements IEquationParser{
 
+    private static final EquationParser parser = new EquationParser();
+    
     @Override
     public AbstractEquation ParseEquation(String entry) {
-        BasicEquation[] terms = SplitTerms(entry);
-        MultiplicativeEquation result = new MultiplicativeEquation(terms[0], terms[1]);
+        int firstIndexOpen = entry.indexOf("(");
+        int secondIndexOpen = entry.indexOf("(", firstIndexOpen+1);
+        int thirdIndexOpen = entry.indexOf("(", secondIndexOpen+1);
+        int firstIndexClose = entry.indexOf(")");
+        int lastIndexClose = entry.lastIndexOf(")");
         
-        for(int i = 2; i < terms.length; ++i){
-            result = new MultiplicativeEquation(result, terms[i]);
+        if (secondIndexOpen == -1 || lastIndexClose == -1)
+            return null;
+        
+        if(firstIndexOpen < firstIndexClose 
+                && firstIndexClose < secondIndexOpen 
+                && secondIndexOpen < lastIndexClose)
+        {
+            if (thirdIndexOpen != -1)
+            {
+                AbstractEquation first = parser.ParseEquation(entry.substring(firstIndexOpen+1, firstIndexClose).trim());
+                AbstractEquation second = parser.ParseEquation(entry.substring(secondIndexOpen, lastIndexClose+1).trim());
+                
+                return new MultiplicativeEquation(first, second);
+            }
+            else
+            {
+                AbstractEquation first = parser.ParseEquation(entry.substring(firstIndexOpen+1, firstIndexClose).trim());
+                AbstractEquation second = parser.ParseEquation(entry.substring(secondIndexOpen+1, lastIndexClose).trim());
+                
+                return new MultiplicativeEquation(first, second);
+            }
         }
-        
-        return result;
+        else
+            return null;
     }
     
 }
