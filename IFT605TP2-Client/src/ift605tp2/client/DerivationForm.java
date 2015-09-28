@@ -26,6 +26,7 @@ public class DerivationForm extends javax.swing.JFrame {
         m_parser = new EquationParser();
         initComponents();
         
+        jTabbedPane1.setEnabledAt(1, m_manager.IsConnected());
         btnDerivate.setEnabled(m_manager.IsConnected());
         btnStopTask.setEnabled(m_manager.IsAdmin());
         btnRefreshTasks.setEnabled(m_manager.IsAdmin());
@@ -53,8 +54,14 @@ public class DerivationForm extends javax.swing.JFrame {
     }
     
     public void RefreskTasks() {
-        lstTasks.setListData(m_manager.GetCurrentlyRunningTasks());
-        lstTasks.setSelectedIndex(0);
+        String[] list = m_manager.GetCurrentlyRunningTasks();
+        
+        if (list != null) {
+            lstTasks.setListData(list);
+            
+            if (list.length > 0)
+                lstTasks.setSelectedIndex(0);
+        }
     }
 
     public void RefreshResults() {
@@ -85,7 +92,7 @@ public class DerivationForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        tabClient = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtHostname = new javax.swing.JTextField();
@@ -114,7 +121,7 @@ public class DerivationForm extends javax.swing.JFrame {
         tbFunctionResult = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         tbDerivateResult = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
+        tabAdmin = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         tbUsername = new javax.swing.JTextField();
@@ -345,24 +352,24 @@ public class DerivationForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout tabClientLayout = new javax.swing.GroupLayout(tabClient);
+        tabClient.setLayout(tabClientLayout);
+        tabClientLayout.setHorizontalGroup(
+            tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabClientLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabClientLayout.createSequentialGroup()
+                        .addGroup(tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tabClientLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,9 +377,9 @@ public class DerivationForm extends javax.swing.JFrame {
                         .addComponent(pnlEquation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        tabClientLayout.setVerticalGroup(
+            tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabClientLayout.createSequentialGroup()
                 .addContainerGap(320, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -380,8 +387,8 @@ public class DerivationForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(tabClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tabClientLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel3)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -395,7 +402,7 @@ public class DerivationForm extends javax.swing.JFrame {
                     .addContainerGap(185, Short.MAX_VALUE)))
         );
 
-        jTabbedPane1.addTab("Client", jPanel2);
+        jTabbedPane1.addTab("Client", tabClient);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -495,29 +502,29 @@ public class DerivationForm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout tabAdminLayout = new javax.swing.GroupLayout(tabAdmin);
+        tabAdmin.setLayout(tabAdminLayout);
+        tabAdminLayout.setHorizontalGroup(
+            tabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabAdminLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(tabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabAdminLayout.createSequentialGroup()
+                        .addGroup(tabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(tabAdminLayout.createSequentialGroup()
                                 .addComponent(btnStopTask, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRefreshTasks)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        tabAdminLayout.setVerticalGroup(
+            tabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -527,7 +534,7 @@ public class DerivationForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStopTask)
                     .addComponent(btnRefreshTasks))
                 .addContainerGap())
@@ -536,7 +543,7 @@ public class DerivationForm extends javax.swing.JFrame {
         btnStopTask.getAccessibleContext().setAccessibleName("btnStopTask");
         btnStopTask.getAccessibleContext().setAccessibleDescription("");
 
-        jTabbedPane1.addTab("Admin", jPanel4);
+        jTabbedPane1.addTab("Admin", tabAdmin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -562,6 +569,7 @@ public class DerivationForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         m_manager.Connect(txtHostname.getText());
         btnDerivate.setEnabled(m_manager.IsConnected());
+        jTabbedPane1.setEnabledAt(1, m_manager.IsConnected());
         if (m_manager.IsConnected()) {
             AppendOutput("Now connected on " + txtHostname.getText());
         } else {
@@ -585,6 +593,11 @@ public class DerivationForm extends javax.swing.JFrame {
 
     private void btnConnectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConnectMouseClicked
         m_manager.ConnectAsAdmin(tbUsername.getText(), tbPassword.getText());
+        
+        if(m_manager.IsAdmin()) {
+            btnRefreshTasks.setEnabled(true);
+            RefreskTasks();            
+        }
     }//GEN-LAST:event_btnConnectMouseClicked
 
     private void btnStopTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStopTaskMouseClicked
@@ -662,9 +675,7 @@ public class DerivationForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
@@ -673,6 +684,8 @@ public class DerivationForm extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList lstTasks;
     private javax.swing.JPanel pnlEquation;
+    private javax.swing.JPanel tabAdmin;
+    private javax.swing.JPanel tabClient;
     private javax.swing.JTextField tbDerivateResult;
     private javax.swing.JTextField tbFunctionResult;
     private javax.swing.JTextField tbParameter;
