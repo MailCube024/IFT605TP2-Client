@@ -2,7 +2,7 @@ package ift605tp2.client;
 
 import ift605tp2.client.parsers.BasicParser;
 import ift605tp2.client.parsers.ConstantParser;
-import ift605tp2.client.parsers.IEquationParser;
+import ift605tp2.client.parsers.EquationParser;
 import ift605tp2.client.parsers.MultiplicativeParser;
 import ift605tp2.client.parsers.SummativeParser;
 import udes.ds.agent.AbstractEquation;
@@ -15,15 +15,17 @@ import udes.ds.agent.Equation;
 public class DerivationForm extends javax.swing.JFrame {
 
     private final ClientManager m_manager;
-    private IEquationParser m_selectedParser;
+    private EquationParser m_parser;
 
     /**
      * Creates new form DerivationForm
      */
     public DerivationForm() {
         m_manager = new ClientManager();
-        m_selectedParser = new ConstantParser();
+        m_parser = new EquationParser();
         initComponents();
+        
+        btnDerivate.setEnabled(m_manager.IsConnected());
     }
     
     public void AppendOutput(String message){
@@ -51,10 +53,10 @@ public class DerivationForm extends javax.swing.JFrame {
         txtEquation = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        optConstant = new javax.swing.JRadioButton();
-        optBasic = new javax.swing.JRadioButton();
-        optMult = new javax.swing.JRadioButton();
-        optSum = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -129,49 +131,13 @@ public class DerivationForm extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        equationTypeGroup.add(optConstant);
-        optConstant.setSelected(true);
-        optConstant.setText("Constant");
-        optConstant.setToolTipText("Only write the constant value (Ex: 2)");
-        optConstant.setName("optConstant"); // NOI18N
-        optConstant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equationTypeSelected(evt);
-            }
-        });
+        jLabel8.setText("70");
 
-        equationTypeGroup.add(optBasic);
-        optBasic.setText("Basic Equation");
-        optBasic.setToolTipText("Write both coefficient & exponent separated by spaces (Ex. 2 3 => 2x^3)");
-        optBasic.setActionCommand("Basic");
-        optBasic.setName("optBasic"); // NOI18N
-        optBasic.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equationTypeSelected(evt);
-            }
-        });
+        jLabel9.setText("7x^2");
 
-        equationTypeGroup.add(optMult);
-        optMult.setText("Multiplicative Equation");
-        optMult.setToolTipText("<html>Write each basic terms on different lines<br/> (Ex:<br/> 2 3 <br/> 4 5<br/>=> 2x^3 * 4x^5)</html>");
-        optMult.setActionCommand("Multiplicative");
-        optMult.setName("optMult"); // NOI18N
-        optMult.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equationTypeSelected(evt);
-            }
-        });
+        jLabel10.setText("7x^3+5x^1");
 
-        equationTypeGroup.add(optSum);
-        optSum.setText("Summative Equation");
-        optSum.setToolTipText("<html>Write each basic terms on different lines<br/> (Ex:<br/> 2 3 <br/> 4 5<br/>=> 2x^3 + 4x^5)</html>");
-        optSum.setActionCommand("Summative");
-        optSum.setName("optSum"); // NOI18N
-        optSum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equationTypeSelected(evt);
-            }
-        });
+        jLabel11.setText("(7x^1)(1x^3+3x^4)");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -180,27 +146,34 @@ public class DerivationForm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(optConstant)
-                    .addComponent(optBasic)
-                    .addComponent(optMult)
-                    .addComponent(optSum))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(optConstant)
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optBasic)
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optMult)
+                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optSum)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel6.setText("Equation type:");
+        jLabel8.getAccessibleContext().setAccessibleName("Constant");
+        jLabel9.getAccessibleContext().setAccessibleName("BasicEquation");
+        jLabel10.getAccessibleContext().setAccessibleName("SummativeEquation");
+        jLabel10.getAccessibleContext().setAccessibleDescription("");
+        jLabel11.getAccessibleContext().setAccessibleName("MultiplicativeEquation");
+        jLabel11.getAccessibleContext().setAccessibleDescription("");
+
+        jLabel6.setText("Examples:");
 
         javax.swing.GroupLayout pnlEquationLayout = new javax.swing.GroupLayout(pnlEquation);
         pnlEquation.setLayout(pnlEquationLayout);
@@ -231,11 +204,13 @@ public class DerivationForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlEquationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDerivate)
                 .addContainerGap())
         );
+
+        jLabel6.getAccessibleContext().setAccessibleName("Examples:");
 
         jLabel4.setText("Equation entry");
 
@@ -285,25 +260,10 @@ public class DerivationForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void equationTypeSelected(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equationTypeSelected
-        String selectedType = evt.getActionCommand();
-        if (selectedType.equalsIgnoreCase(EquationType.Constant.name())) {
-            m_selectedParser = new ConstantParser();
-        }
-        if (selectedType.equalsIgnoreCase(EquationType.Basic.name())) {
-            m_selectedParser = new BasicParser();
-        }
-        if (selectedType.equalsIgnoreCase(EquationType.Multiplicative.name())) {
-            m_selectedParser = new MultiplicativeParser();
-        }
-        if (selectedType.equalsIgnoreCase(EquationType.Summative.name())) {
-            m_selectedParser = new SummativeParser();
-        }
-    }//GEN-LAST:event_equationTypeSelected
-
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         // TODO add your handling code here:
         m_manager.Connect(txtHostname.getText());
+        btnDerivate.setEnabled(m_manager.IsConnected());
         if (m_manager.IsConnected()) {
             AppendOutput("Now connected on " + txtHostname.getText());
         } else {
@@ -313,7 +273,7 @@ public class DerivationForm extends javax.swing.JFrame {
 
     private void btnDerivateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDerivateMouseClicked
         // TODO add your handling code here:
-        AbstractEquation parsedEquation = (AbstractEquation) m_selectedParser.ParseEquation(txtEquation.getText());
+        AbstractEquation parsedEquation = (AbstractEquation) m_parser.ParseEquation(txtEquation.getText());
         AbstractEquation eq = m_manager.Derivate((Equation)parsedEquation);
         if (eq == null) {
             AppendOutput("Error while derivating equation.");
@@ -360,19 +320,19 @@ public class DerivationForm extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.ButtonGroup equationTypeGroup;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JRadioButton optBasic;
-    private javax.swing.JRadioButton optConstant;
-    private javax.swing.JRadioButton optMult;
-    private javax.swing.JRadioButton optSum;
     private javax.swing.JPanel pnlEquation;
     private javax.swing.JTextArea txtEquation;
     private javax.swing.JTextField txtHostname;
