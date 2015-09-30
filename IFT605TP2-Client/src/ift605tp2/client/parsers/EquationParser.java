@@ -17,13 +17,16 @@ public class EquationParser implements IEquationParser {
     private static final SummativeParser summativeParser = new SummativeParser();
     private static final BasicParser basicParser = new BasicParser();
     private static final ConstantParser constantParser = new ConstantParser();
+    private static final SinusParser sinusParser = new SinusParser();
     
     @Override
     public AbstractEquation ParseEquation(String entry) {
         if (entry == null || entry.equals(""))
             return null;
         
-        if (entry.contains("(") && entry.contains(")"))
+        if (entry.contains("sin"))
+            return sinusParser.ParseEquation(entry);
+        else if (entry.contains("(") && entry.contains(")"))
             return multiplicativeParser.ParseEquation(entry);
         else if (entry.contains("+"))
             return summativeParser.ParseEquation(entry);
